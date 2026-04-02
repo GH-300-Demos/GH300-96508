@@ -8,6 +8,10 @@ public class Product
 
     public Product(string description, string code, decimal unitCost)
     {
+        if (unitCost <= 0) {
+            throw new ArgumentException("Unit cost must be greater than zero", nameof(unitCost));
+        }
+
         this.description = description;
         this.code = code;
         this.unitCost = unitCost;
@@ -28,6 +32,11 @@ public class Product
     public decimal UnitCost
     {
         get { return unitCost; }
-        set { unitCost = value; }
+        set {
+            if (value <= 0) {
+                throw new ArgumentException("Unit cost must be greater than zero", nameof(value));
+            }
+            unitCost = value;
+        }
     }
 }
