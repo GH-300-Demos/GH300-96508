@@ -9,6 +9,10 @@ public class Order
 
     public Order(int id, CustomerInfo customerInfo)
     {
+        if (id <= 0) {
+            throw new ArgumentException("Order ID must be greater than zero", nameof(id));
+        }
+
         this.id = id;
         this.customerInfo = customerInfo;
         this.orderItems = new List<OrderItem>();
@@ -18,7 +22,12 @@ public class Order
     public int Id
     {
         get { return id; }
-        set { id = value; }
+        set {
+            if (value <= 0) {
+                throw new ArgumentException("Order ID must be greater than zero", nameof(value));
+            }
+            id = value;
+        }
     }
 
     public CustomerInfo CustomerInfo

@@ -10,6 +10,9 @@ public class OrderItem
         if (product == null) {
             throw new ArgumentNullException(nameof(product), "Product cannot be null");
         }
+        if (qty <= 0) {
+            throw new ArgumentException("Quantity must be greater than zero", nameof(qty));
+        }
 
         this.product = product;
         this.qty = qty;
@@ -24,7 +27,12 @@ public class OrderItem
     public int Qty
     {
         get { return qty; }
-        set { qty = value; }
+        set {
+            if (value <= 0) {
+                throw new ArgumentException("Quantity must be greater than zero", nameof(value));
+            }
+            qty = value;
+        }
     }
 
     public decimal TotalCost
