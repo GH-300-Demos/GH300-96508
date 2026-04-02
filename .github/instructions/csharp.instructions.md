@@ -1,3 +1,8 @@
+---
+description: 'Basic instructions for data model classes and language format.'
+applyTo: '**/*.cs'
+---
+
 # Data model classes
 
 - All the data model classes should be in a specific folder called `Models` within the main source directory.
