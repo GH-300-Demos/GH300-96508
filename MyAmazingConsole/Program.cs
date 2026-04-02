@@ -11,18 +11,22 @@ var order1 = new Order(1001, customer1);
 Console.WriteLine($"Created Order #{order1.Id} for {order1.CustomerInfo.FullName}");
 Console.WriteLine($"Initial Status: {order1.Status}");
 
-// Add products to order 1
-var product1 = new Product("Laptop Computer", "LAP-001", 1, 1299.99m);
-var product2 = new Product("Wireless Mouse", "MSE-042", 2, 29.99m);
-var product3 = new Product("USB-C Cable", "CBL-256", 3, 15.99m);
+// Create products and order items for order 1
+var product1 = new Product("Laptop Computer", "LAP-001", 1299.99m);
+var product2 = new Product("Wireless Mouse", "MSE-042", 29.99m);
+var product3 = new Product("USB-C Cable", "CBL-256", 15.99m);
 
-order1.AddProduct(product1);
-order1.AddProduct(product2);
-order1.AddProduct(product3);
+var orderItem1 = new OrderItem(product1, 1);
+var orderItem2 = new OrderItem(product2, 2);
+var orderItem3 = new OrderItem(product3, 3);
 
-Console.WriteLine($"\nProducts in Order #{order1.Id}:");
-foreach (var product in order1.Products) {
-    Console.WriteLine($"  - {product.Description} ({product.Code}): {product.Qty} x ${product.UnitCost:F2} = ${product.TotalCost:F2}");
+order1.AddItem(orderItem1);
+order1.AddItem(orderItem2);
+order1.AddItem(orderItem3);
+
+Console.WriteLine($"\nItems in Order #{order1.Id}:");
+foreach (var orderItem in order1.OrderItems) {
+    Console.WriteLine($"  - {orderItem.Product.Description} ({orderItem.Product.Code}): {orderItem.Qty} x ${orderItem.Product.UnitCost:F2} = ${orderItem.TotalCost:F2}");
 }
 
 Console.WriteLine($"\nOrder Total: ${order1.TotalCost:F2}");
@@ -37,16 +41,19 @@ var order2 = new Order(1002, customer2);
 Console.WriteLine($"Created Order #{order2.Id} for {order2.CustomerInfo.FullName}");
 Console.WriteLine($"Address: {order2.CustomerInfo.Address}");
 
-// Add products to order 2
-var product4 = new Product("Smartphone", "PHN-789", 1, 899.99m);
-var product5 = new Product("Screen Protector", "ACC-123", 2, 9.99m);
+// Create products and order items for order 2
+var product4 = new Product("Smartphone", "PHN-789", 899.99m);
+var product5 = new Product("Screen Protector", "ACC-123", 9.99m);
 
-order2.AddProduct(product4);
-order2.AddProduct(product5);
+var orderItem4 = new OrderItem(product4, 1);
+var orderItem5 = new OrderItem(product5, 2);
 
-Console.WriteLine($"\nProducts in Order #{order2.Id}:");
-foreach (var product in order2.Products) {
-    Console.WriteLine($"  - {product.Description} ({product.Code}): {product.Qty} x ${product.UnitCost:F2} = ${product.TotalCost:F2}");
+order2.AddItem(orderItem4);
+order2.AddItem(orderItem5);
+
+Console.WriteLine($"\nItems in Order #{order2.Id}:");
+foreach (var orderItem in order2.OrderItems) {
+    Console.WriteLine($"  - {orderItem.Product.Description} ({orderItem.Product.Code}): {orderItem.Qty} x ${orderItem.Product.UnitCost:F2} = ${orderItem.TotalCost:F2}");
 }
 
 Console.WriteLine($"\nOrder Total: ${order2.TotalCost:F2}");

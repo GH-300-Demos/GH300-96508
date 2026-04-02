@@ -4,14 +4,14 @@ public class Order
 {
     private int id;
     private CustomerInfo customerInfo;
-    private List<Product> products;
+    private List<OrderItem> orderItems;
     private OrderStatus status;
 
     public Order(int id, CustomerInfo customerInfo)
     {
         this.id = id;
         this.customerInfo = customerInfo;
-        this.products = new List<Product>();
+        this.orderItems = new List<OrderItem>();
         this.status = OrderStatus.Created;
     }
 
@@ -27,10 +27,10 @@ public class Order
         set { customerInfo = value; }
     }
 
-    public List<Product> Products
+    public List<OrderItem> OrderItems
     {
-        get { return products; }
-        set { products = value; }
+        get { return orderItems; }
+        set { orderItems = value; }
     }
 
     public OrderStatus Status
@@ -41,23 +41,25 @@ public class Order
 
     public decimal TotalCost
     {
-        get { return products.Sum(p => p.TotalCost); }
+        get { return orderItems.Sum(item => item.TotalCost); }
     }
 
-    public void AddProduct(Product product)
+    public void AddItem(OrderItem orderItem)
     {
-        if (product == null) {
-            throw new ArgumentNullException(nameof(product), "Product cannot be null");
+        if (orderItem == null) {
+            throw new ArgumentNullException(nameof(orderItem), "Order item cannot be null");
         }
-        products.Add(product);
+
+        orderItems.Add(orderItem);
     }
 
-    public void RemoveProduct(Product product)
+    public void RemoveItem(OrderItem orderItem)
     {
-        if (product == null) {
-            throw new ArgumentNullException(nameof(product), "Product cannot be null");
+        if (orderItem == null) {
+            throw new ArgumentNullException(nameof(orderItem), "Order item cannot be null");
         }
-        products.Remove(product);
+
+        orderItems.Remove(orderItem);
     }
 
     public void UpdateStatus(OrderStatus newStatus)
