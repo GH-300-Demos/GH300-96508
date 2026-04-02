@@ -8,8 +8,8 @@ public class Product
 
     public Product(string description, string code, decimal unitCost)
     {
-        if (unitCost < 0) {
-            throw new ArgumentException("Unit cost cannot be negative", nameof(unitCost));
+        if (unitCost <= 0) {
+            throw new ArgumentException("Unit cost must be greater than zero", nameof(unitCost));
         }
 
         this.description = description;
@@ -33,8 +33,8 @@ public class Product
     {
         get { return unitCost; }
         set {
-            if (value < 0) {
-                throw new ArgumentException("Unit cost cannot be negative", nameof(value));
+            if (value <= 0) {
+                throw new ArgumentException("Unit cost must be greater than zero", nameof(value));
             }
             unitCost = value;
         }
